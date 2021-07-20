@@ -26,5 +26,6 @@ for li in list_sp:
     date.append(date_sp)
 
     comment_sp = li.find('span',attrs={'class':'autolink'})
-    print(comment_sp.text)
-    comt.append(comment_sp)
+    if comment_sp!=None:
+        print(comment_sp.text)
+        comt.append(comment_sp)
