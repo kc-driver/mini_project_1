@@ -2,6 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import chromedriver_binary
 import pandas as pd
+import time
 
 
 user=[]
@@ -37,13 +38,18 @@ tglove = root + str(page)
 driver.get(tglove)
 
 # load data into bs4
-soup = BeautifulSoup(driver.page_source,'html.parser')
-list_sp = soup.find_all('td',attrs={'style':'word-wrap: break-word;'})
+#soup = BeautifulSoup(driver.page_source,'html.parser')
+#list_sp = soup.find_all('td',attrs={'style':'word-wrap: break-word;'})
 
-for page in range(400,403):
+for page in range(400,500):
+    soup = BeautifulSoup(driver.page_source,'html.parser')
+    list_sp = soup.find_all('td',attrs={'style':'word-wrap: break-word;'})
     my_scrape()
     page += 1
     tglove = root + str(page) #goto next page
+    driver.get(tglove)
+    time.sleep(1)
+    
         
 klse_dict = {'Date': date,'Username': user,'Comment': comt}
 klse_sentiment = pd.DataFrame(klse_dict)
